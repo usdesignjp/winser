@@ -77,6 +77,12 @@ var options = stdio.getopt({
     }
 }, 'winser [OPTION1] [OPTION2] ...');
 
+if (typeof options.env === 'string') {
+    options.env = [options.env];
+}
+if (typeof options.set === 'string') {
+    options.set = [options.set];
+}
 if (options.version){
     console.log('winser v' + require("../package.json").version);
     process.exit(0);
