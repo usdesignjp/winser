@@ -109,11 +109,15 @@ function getStartupType(){
 
 var quitState = "quit";
 var nssmLocation = null;
+var execOptions = {
+    encoding: 'utf16le'
+};
 
 function nssmExec(command, arguments, callback){
     if (arguments === null)
         arguments = '';
     exec(nssmLocation + ' '+ command +' "'+ options.name + '" ' + arguments,
+        execOptions,
         function(err, stdout, stderr){
             if (stderr){
                 !options.silent && console.error(stderr);
@@ -214,6 +218,7 @@ async.series([
     function(next){
         if (options.stop && options.remove){
             exec(nssmLocation + ' status "'+ options.name + '"',
+                execOptions,
                 function(err, stdout, stderr){
                     if (!err && !stderr){
                         var result = stdout.replace(/\0/gi, "").split("\r\n")[0];
