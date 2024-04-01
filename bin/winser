@@ -179,7 +179,7 @@ async.series([
                     next('Can\'t find npm...');
                     return;
                 }
-                options.startcmd = 'npm start';
+                options.startcmd = 'cmd /c npm start';
                 next();
             });
             return;
